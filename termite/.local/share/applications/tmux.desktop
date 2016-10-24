@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Tmux
+Comment=Use the command line
+Exec=tmuxTerm --borderless -e /home/jz/bin/tmux.sh
+Icon=tmux
+Type=Application
+Categories=GTK;System;TerminalEmulator;
+StartupNotify=true
