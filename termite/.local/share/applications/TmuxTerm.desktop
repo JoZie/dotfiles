@@ -1,6 +1,6 @@
 #!/usr/bin/env xdg-open
 [Desktop Entry]
-Name=Tmux
+Name=TmuxTerm
 Comment=Use the command line
 Exec=tmuxTerm --borderless -e /home/jz/bin/tmux.sh
 Icon=tmux
