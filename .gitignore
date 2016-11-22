@@ -1,5 +1,6 @@
 
 # zsh
 zsh/.zsh/plugins/*
-zsh/.zsh/zdirs
-zsh/.zsh/zsh_history
+zsh/.zsh/.zdirs
+zsh/.zsh/.zsh_history
+zsh/.zsh/.zcompdump*

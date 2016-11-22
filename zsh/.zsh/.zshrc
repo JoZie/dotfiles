@@ -51,11 +51,6 @@
         source "${HOME}/.zsh/themes/jz.zsh-theme"
     # }}}
 
-    # >> Init Lmod environment modules {{{
-        source /opt/packages/lmod/lmod/init/profile
-        source /opt/packages/lmod/lmod/init/zsh
-    # }}}
-
     # >> NeoVim as MANPAGER {{{
         export MANPAGER="nvim -R -c 'set ft=man' -"
     # }}}
@@ -66,6 +61,30 @@
         alias vi="nvim"
         alias oldvim="vim"
     # }}}
+
+    # >> Keybindings {{{
+        # Vim Bb/Ww with <ctrl>-arrows
+        bindkey "^[[A" vi-backward-word
+        bindkey "^[[B" vi-forward-word
+        bindkey "^[[C" vi-forward-blank-word
+        bindkey "^[[D" vi-backward-blank-word
+
+        bindkey "^W" delete-word
+        # Kill Words with backspace
+        bindkey "^H" vi-backward-kill-word
+
+        # Set-Up history substring search
+        bindkey '^[OA' history-substring-search-up
+        bindkey '^[OB' history-substring-search-down
+    # }}}
+
+    # >> Set-Up tmp files{{{
+        HISTFILE=$ZDOTDIR/.zsh_history
+        dirsrack_file=$ZDOTDIR/.zdirs
+    # }}}
+
+    # Fancy svn diff alias
+    alias svndi='svn diff --diff-cmd colordiff | less -R'
 
 ####################################################################################################
 # }}}
