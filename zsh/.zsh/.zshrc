@@ -31,6 +31,7 @@
         zgen oh-my-zsh plugins/command-not-found
         zgen load zsh-users/zsh-syntax-highlighting
         zgen load zsh-users/zsh-history-substring-search
+        zgen load yonchu/zsh-vcs-prompt
 
         # completions
         zgen load zsh-users/zsh-completions src

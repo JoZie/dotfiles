@@ -1,22 +1,47 @@
-autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git svn hg
-precmd() {
-    vcs_info
-}
 
-F="$fg_bold[blue]($fg_no_bold[magenta]%s$fg_bold[blue])-[$fg_no_bold[green]%b$fg_bold[blue]]$reset_color%u%c "
-AF="$fg_bold[blue]($fg_no_bold[magenta]%s$fg_bold[blue])-[$fg_no_bold[green]%b$fg_bold[blue]|$fg_no_bold[red]%a$fg_bold[blue]]$reset_color%u%c "
-BF="%b$fg[red]:$fg[yellow]%r"
+ZSH_VCS_PROMPT_USING_PYTHON='true'
 
-zstyle ':vcs_info:*'              stagedstr '%F{yellow} ⚡%f'
-zstyle ':vcs_info:*'              unstagedstr '%F{red} ⚡%f'
-zstyle ':vcs_info:git:*'          check-for-changes true
-zstyle ':vcs_info:*'              actionformats "$AF"
-zstyle ':vcs_info:*'              formats       "$F"
-zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat  "$BF"
+## The symbols.
+ZSH_VCS_PROMPT_AHEAD_SIGIL='↑ '
+ZSH_VCS_PROMPT_BEHIND_SIGIL='↓ '
+ZSH_VCS_PROMPT_STAGED_SIGIL=' '
+ZSH_VCS_PROMPT_CONFLICTS_SIGIL='✖ '
+ZSH_VCS_PROMPT_UNSTAGED_SIGIL=' '
+ZSH_VCS_PROMPT_UNTRACKED_SIGIL=' '
+ZSH_VCS_PROMPT_STASHED_SIGIL='⛁ '
+ZSH_VCS_PROMPT_CLEAN_SIGIL='✔ '
 
-function prompt_char {
-	if [ $UID -eq 0 ]; then echo "%{$fg[red]%}#%{$reset_color%}"; else echo $; fi
+VCS_NAME='%{%B%F{blue}%}(%{%b%F{magenta}%}#s%{%B%F{blue}%})%{%b%f%}'
+# Branch name
+BRANCH_NAME='%{%B%F{blue}%}[%{%b%F{green}%}#b%{%f%b%}'
+#Action
+GIT_ACTION=':%{%B%F{red}%}#a%{%f%b%}'
+# Ahead and Behind
+AHEAD_BEHIND='#c#d|'
+# Staged
+GIT_STAGED='%{%F{blue}%}#e%{%f%b%}'
+# Unstaged
+GIT_UNSTAGED='%{%G%F{yellow}%}#g%{%f%b%}'
+# Conflicts
+CONFLICTS='%{%G%F{red}%}#f%{%f%b%}'
+# Untracked
+UNTRACKED='#h'
+# Stashed
+GIT_STASHED='%{%F{magenta}%}#i%{%f%b%}'
+# Clean
+CLEAN='%{%F{green}%}#j%{%B%F{blue}%}]%{%f%b%}'
+
+# svn branch format
+zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat  "%b$fg[red]:$fg[yellow]%r"
+
+ZSH_VCS_PROMPT_GIT_FORMATS=$VCS_NAME$BRANCH_NAME$AHEAD_BEHIND$GIT_STAGED$GIT_UNSTAGED$CONFLICTS$UNTRACKED$GIT_STASHED$CLEAN
+ZSH_VCS_PROMPT_GIT_ACTION_FORMATS=$VCS_NAME$BRANCH_NAME$GIT_ACTION$AHEAD_BEHIND$GIT_STAGED$GIT_UNSTAGED$CONFLICTS$UNTRACKED$GIT_STASHED$CLEAN
+ZSH_VCS_PROMPT_VCS_FORMATS=$VCS_NAME$BRANCH_NAME$CLEAN
+ZSH_VCS_PROMPT_VCS_ACTION_FORMATS=$VCS_NAME$BRANCH_NAME$GIT_ACTION$CLEAN
+
+function prompt_char
+{
+    if [ $UID -eq 0 ]; then echo "%{$fg[red]%}#%{$reset_color%}"; else echo $; fi
 }
 
 function prompt_return_code
@@ -41,5 +66,5 @@ function prompt_pwd
 
 PROMPT=\
 '$(prompt_return_code)
-$(prompt_user_host): $(prompt_pwd) ${vcs_info_msg_0_}
+$(prompt_user_host): $(prompt_pwd) $(vcs_super_info)
 %_$(prompt_char) '
