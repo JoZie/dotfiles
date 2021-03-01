@@ -1,0 +1,31 @@
+[user]
+	email = Johannes.Ziegenbalg@gmail.com
+	name = Johannes Ziegenbalg
+[core]
+	; editor = editor --remote-tab-wait
+	editor = nvim
+	excludesfile = ~/.config/git/gitignore
+[color]
+	ui = auto
+[init]
+	templatedir = ~/.config/git/templates
+[gui]
+	fontui = -family \"DejaVu Sans\" -size 12 -weight normal -slant roman -underline 0 -overstrike 0
+	fontdiff = -family \"FantasqueSansMono Nerd Font\" -size 12 -weight normal -slant roman -underline 0 -overstrike 0
+[diff]
+	algorithm = minimal
+[merge]
+	conflictstyle = diff3
+[alias]
+        mr = !sh -c 'git fetch $1 merge-requests/$2/head && git worktree add --track --checkout -b mr-$1-$2 merge-requests/$2 $1/merge-requests/$2' -
+[branch]
+	autosetuprebase = always
+[pull]
+	rebase = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[rerere]
+	enabled = true
