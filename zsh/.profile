@@ -12,11 +12,7 @@
 # Source: https://github.com/JoZie/dotfiles
 ####################################################################################################
 
-# >> Prepend $HOME/bin to $PATH << {{{
-if [ -d "$HOME/bin" ]; then
-    PATH="$HOME/bin:$PATH"
-fi
-# }}}
+export ZDOTDIR="/home/jz/.config/zsh"
 
 # >> Modeline << {{{
 #    vim: fdm=marker
